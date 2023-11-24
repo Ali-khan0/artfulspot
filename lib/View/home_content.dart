@@ -1,3 +1,4 @@
+import 'package:artfulspot/Widgets/imagedialog.dart';
 import 'package:artfulspot/Widgets/zoomable_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,20 +45,42 @@ class _HomeContentState extends State<HomeContent> {
               mainAxisExtent: 400),
           itemCount: imageUrls.length,
           itemBuilder: (context, index) {
-            return SizedBox(
-              // height: Get.height * 0.3,
-              child: Column(
-                children: [
-                  MyZoomableImage(),
-                  SizedBox(
-                    height: 50,
-                    // width: Get.width * 0.07,
-                    child: Text(
-                      "Demo paint is here",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+            return InkWell(
+              onTap: () {
+                Get.dialog(
+                  AlertDialog(
+                    backgroundColor: Color(0xfffefeff),
+                    title: Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          )),
                     ),
-                  )
-                ],
+                    content: ImageDialog(),
+                    actions: [],
+                  ),
+                );
+              },
+              child: SizedBox(
+                // height: Get.height * 0.3,
+                child: Column(
+                  children: [
+                    MyZoomableImage(),
+                    SizedBox(
+                      height: 50,
+                      // width: Get.width * 0.07,
+                      child: Text(
+                        "Demo paint is here",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
           },
